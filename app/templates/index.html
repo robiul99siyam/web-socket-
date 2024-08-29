@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>WebSocket testing !</h1>
+
+    <script>
+
+        const chatSocket = new WebSocket('ws://127.0.0.1:8000/ws/sc/');
+
+        chatSocket.onopen = function () {
+            console.log('WebSocket connection established.');
+            const message = {
+                'message': 'Hello, world!'
+            };
+            chatSocket.send(JSON.stringify(message));
+        };
+        chatSocket.onmessage = function (event) {
+            const message = JSON.parse(event.data);
+            console.log('Received message:', message);
+        };
+    </script>
+</body>
+
+</html>
